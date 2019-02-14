@@ -1,0 +1,31 @@
+{
+  "name": "openapi-editor",
+  "version": "0.1.0",
+  "description": "OpenAPI Editor is a wrapper for Swagger-Editor 3.x",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "tslint --project \"./tsconfig.json\"",
+    "docs": "typedoc --out docs src",
+    "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs"
+  },
+  "keywords": [
+    "OpenAPI",
+    "Swagger"
+  ],
+  "author": "Jose G. Alfonso <jgalfonso@me.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.3",
+    "chai": "^4.2.0",
+    "gh-pages": "^2.0.1",
+    "mocha": "^5.2.0",
+    "tslint": "^5.12.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3"
+  }
+}
