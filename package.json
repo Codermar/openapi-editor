@@ -2,28 +2,66 @@
   "name": "openapi-editor",
   "version": "0.1.0",
   "description": "OpenAPI Editor is a wrapper for Swagger-Editor 3.x",
-  "main": "index.js",
+  "author": "Jose G. Alfonso <jgalfonso@me.com>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --reporter spec",
-    "build": "tsc",
     "build:watch": "tsc --watch",
-    "lint": "tslint --project \"./tsconfig.json\"",
+    "build": "tsc",
+    "ci": "npm run lint && npm run build && npm run test:coverage",
     "docs": "typedoc --out docs src",
-    "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs"
+    "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs",
+    "lint": "tslint --project \"./tsconfig.json\"",
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm run ci",
+    "preversion": "npm run ci",
+    "test": "nyc mocha",
+    "test:coverage": "TS_NODE_COMPILER_OPTIONS='{\"target\":\"es6\"}' nyc mocha",
+    "test:temp": "nyc mocha -r ts-node/register src/**/*.spec.ts",
+    "test:watch": "mocha -r ts-node/register src/**/*.spec.ts --watch --watch-extensions ts"
   },
   "keywords": [
     "OpenAPI",
     "Swagger"
   ],
-  "author": "Jose G. Alfonso <jgalfonso@me.com>",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Codermar/openapi-editor.git"
+  },
   "license": "MIT",
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/istanbul": "^0.4.30",
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.9.3",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
     "gh-pages": "^2.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
+    "nyc": "^13.2.0",
+    "source-map-support": "^0.5.10",
+    "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3"
