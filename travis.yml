@@ -1,9 +1,9 @@
 language : node_js
-node_js :
+node_js :  
  - stable
-install:
+install:  
  - npm install
-script:
- - npm test
-before_script:
- - npm run build
+script:  
+ - npm run ci
+# Update Coveralls
+after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
