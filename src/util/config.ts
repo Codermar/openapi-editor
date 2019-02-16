@@ -1,5 +1,7 @@
 
 import path from 'path';
+import fs from 'fs';
+import colors from 'colors';
 
 interface Config {
   rootDir: string;
@@ -12,7 +14,7 @@ interface Config {
 }
 
 const config: Config = {
-  rootDir: path.resolve(__dirname, '..'),
+  rootDir: path.resolve(__dirname, '../../'),
   editorDir: '',
   userHome: process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'],
   debug: !!process.env.DEBUG,
@@ -23,5 +25,12 @@ const config: Config = {
 
 config.nodeModules = path.resolve(config.rootDir, 'node_modules');
 config.editorDir = path.resolve(config.nodeModules, 'swagger-editor-dist');
+
+if (!fs.existsSync(config.nodeModules)) {
+  console.error(colors.red(`Node modules path ${config.nodeModules} does not exist.`));
+}
+if (!fs.existsSync(config.editorDir)) {
+  console.error(colors.red(`Editor dist path ${config.editorDir} does not exist.`));
+}
 
 export default config;

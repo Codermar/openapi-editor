@@ -5,13 +5,16 @@
  */
 import path from 'path';
 import fs from 'fs';
+import util from 'util';
 import colors from 'colors';
 import express from 'express';
 import serveStatic from 'serve-static';
-import config from './config';
+import config from './util/config';
+import browser from './util/browser';
 
 interface Options {
   oasFilePath: string;
+  host?: string;
   port?: number;
   silent?: boolean; // invoque browser or run silently
 }
@@ -29,7 +32,7 @@ const SWAGGER_EDITOR_CONFIG_PATH = '/config/defaults.json';
 
 export const edit = (options: Options): void => {
   console.log('*** OpenAPI Editor Options:', options);
-  console.log('config: ', config);
+  // console.log('config: ', config);
 
   if (!fs.existsSync(options.oasFilePath)) {
     console.error(colors.red(`The OAS file provided ${options.oasFilePath} does not exist.`));
@@ -62,4 +65,39 @@ export const edit = (options: Options): void => {
 
   const editorIndexFile = `${config.editorDir}/index.html`;
 
+  if (fs.existsSync(editorIndexFile)) {
+    // as a safeguard, delete the original index file which will not contain the
+    // custom scripting required for puppeteer
+    fs.unlink(`${config.editorDir}/index.html`, (err: any) => {
+      if (err) { throw err; }
+    });
+  }
+
+  // start //
+  const http = require('http');
+  const server = http.createServer(app);
+  const hostname = options.host || '127.0.0.1';
+  let port = options.port || 0;
+
+  server.listen(port, hostname, () => {
+    port = server.address().port;
+    const editorUrl = util.format('http://%s:%d/?url=/oas/spec', hostname, port);
+    const editApiUrl = util.format('http://%s:%d/oas/spec', hostname, port);
+    const dontKillMessage = '- Do not terminate this process or close this window until finished editing -';
+
+    console.log(colors.green('*** Puppeteer OpenAPI Swagger Editor ***'));
+
+    if (!options.silent) {
+      browser.open(editorUrl, (err: any) => {
+        if (err) {
+          console.error(err);
+          // return cb(err);
+        }
+        console.log(colors.gray(dontKillMessage));
+      });
+    } else {
+      console.log(`Running Swagger Editor API server. You can make GET and PUT calls to ${editApiUrl}`);
+      console.log(colors.gray(dontKillMessage));
+    }
+  });
 };

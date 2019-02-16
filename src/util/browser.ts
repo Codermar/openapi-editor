@@ -41,7 +41,7 @@ const platformOpeners: any = {
 };
 
 // note: platform parameter is just for testing...
-function platformOpen(url: string, cb: (err: any) => void, platform: string) {
+function platformOpen(url: string, cb: (err: any) => void, platform?: string) {
   platform = platform || process.platform;
   if (!platformOpeners[platform]) { platform = 'other'; }
   platformOpeners[platform](url, cb);
