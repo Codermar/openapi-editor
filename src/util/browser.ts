@@ -6,18 +6,18 @@ const platformOpeners: any = {
   darwin(url: string, cb: (err: any) => void) {
     const browser = escape(config.browser);
     if (browser) {
-      open('open -a ' + browser, url, cb);
+      open(`Open -a ${browser}`, url, cb);
     } else {
-      open('open', url, cb);
+      open('Open', url, cb);
     }
   },
 
   win32(url: string, cb: (err: any) => void) {
     const browser = escape(config.browser);
     if (browser) {
-      open('start "" "' + browser + '"', url, cb);
+      open(`Start ${browser}`, url, cb);
     } else {
-      open('start ""', url, cb);
+      open('Start ""', url, cb);
     }
   },
 
@@ -48,9 +48,9 @@ function platformOpen(url: string, cb: (err: any) => void, platform?: string) {
 }
 
 function open(command: any, url: string, cb: (err: any) => void) {
-  if (config.debug) { console.log('command: ' + command); }
-  console.log('Opening browser to: ' + url);
-  Child.exec(command + ' "' + escape(url) + '"', cb);
+  if (config.debug) { console.log(`command: ${command}`); }
+  console.log(`Opening browser to: ${url}`);
+  Child.exec(`${command} "${escape(url)}"`, cb);
 }
 
 function escape(s: string) {
