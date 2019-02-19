@@ -12,10 +12,10 @@ import serveStatic from 'serve-static';
 import config from './util/config';
 import browser from './util/browser';
 
-interface Options {
+export interface Options {
   oasFilePath: string;
   host?: string;
-  port?: number;
+  port?: string;
   silent?: boolean; // invoque browser or run silently
 }
 
@@ -31,8 +31,7 @@ const SWAGGER_EDITOR_UI_PATH = '/swagger-editor';
 const SWAGGER_EDITOR_CONFIG_PATH = '/config/defaults.json';
 
 export const edit = (options: Options): void => {
-  console.log('*** OpenAPI Editor Options:', options);
-  // console.log('config: ', config);
+  // console.log('*** OpenAPI Editor Options:', options);
 
   if (!fs.existsSync(options.oasFilePath)) {
     console.error(colors.red(`The OAS file provided ${options.oasFilePath} does not exist.`));
@@ -73,15 +72,16 @@ export const edit = (options: Options): void => {
     });
   }
 
-  // start //
+  // start editor in browser //
   const http = require('http');
   const server = http.createServer(app);
   const hostname = options.host || '127.0.0.1';
   let port = options.port || 0;
+  let editorUrl;
 
   server.listen(port, hostname, () => {
     port = server.address().port;
-    const editorUrl = util.format('http://%s:%d/?url=/oas/spec', hostname, port);
+    editorUrl = util.format('http://%s:%d/?url=/oas/spec', hostname, port);
     const editApiUrl = util.format('http://%s:%d/oas/spec', hostname, port);
     const dontKillMessage = '- Do not terminate this process or close this window until finished editing -';
 
