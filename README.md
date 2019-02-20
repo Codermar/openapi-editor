@@ -18,7 +18,7 @@ OpenAPI Editor is a wrapper for Swagger-Editor 3.x".
 
 ## Usage
 
-### Installed globally
+<!-- ### Installed globally
 
 ```bash
 cd your-project-dir
@@ -28,7 +28,7 @@ cd your-project-dir
 
 ```bash
   openapi-editor --path ./src/api/my-openapi.yaml --port 10010
-```
+``` -->
 
 ### Installed as Local Dependency
 
