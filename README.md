@@ -7,8 +7,8 @@ OpenAPI Editor is a wrapper for Swagger-Editor 3.x".
 * Edit, validate, and save your [Open API specifications](https://github.com/OAI/OpenAPI-Specification) yaml file in the browser using [Swagger Editor](https://github.com/swagger-api/swagger-editor).
 * Additional Features provided by [Swagger Editor](https://github.com/swagger-api/swagger-editor)
 
-[![Build Status](https://travis-ci.org/<username>/<reponame>.svg?branch=master)](https://travis-ci.org/<username>/<reponame>)
-[![Coverage Status](https://coveralls.io/repos/github/<username>/<reponame>/badge.svg?branch=master)](https://coveralls.io/github/<username>/<reponame>?branch=master)
+[![Build Status](https://travis-ci.org/<username>/<reponame>.svg?branch=master)](https://travis-ci.org/Codermar/openapi-editor)
+[![Coverage Status](https://coveralls.io/repos/github/<username>/<reponame>/badge.svg?branch=master)](https://coveralls.io/github/Codermar/openapi-editor?branch=master)
 
 ## Installation
 
