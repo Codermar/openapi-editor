@@ -85,7 +85,7 @@ export const edit = (options: Options): void => {
     const editApiUrl = util.format('http://%s:%d/oas/spec', hostname, port);
     const dontKillMessage = '- Do not terminate this process or close this window until finished editing -';
 
-    console.log(colors.green('*** Puppeteer OpenAPI Swagger Editor ***'));
+    console.log(colors.green('*** OpenAPI Swagger Editor ***'));
 
     if (!options.silent) {
       browser.open(editorUrl, (err: any) => {
