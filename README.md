@@ -14,7 +14,7 @@ OpenAPI Editor is a wrapper for Swagger-Editor 3.x".
 
   ```npm i openapi-editor``` 
   
-  *Optional global install* ```npm i openapi-editor -g```
+  <!-- *Optional global install* ```npm i openapi-editor -g``` -->
 
 ## Usage
 
