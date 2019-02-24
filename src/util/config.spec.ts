@@ -16,8 +16,8 @@ describe('Config', () => {
     expect(exists).to.be.true;
   });
 
-  it('It should return true when config.editorDir path exists', () => {
-    const exists = fs.existsSync(config.editorDir);
+  it('It should return true when config.editorPath path exists', () => {
+    const exists = fs.existsSync(config.editorPath);
     expect(exists).to.be.true;
   });
 
