@@ -1,5 +1,5 @@
 // tslint:disable: no-unused-expression
-import { edit } from './index';
+import { edit } from './editor';
 import { expect } from 'chai';
 import 'mocha';
 import fs from 'fs';
@@ -9,7 +9,6 @@ describe('OpenApi Editor', () => {
   let swaggerFile: string;
 
   before((done) => {
-    // console.log(':::swaggerFile', swaggerFile);
     swaggerFile = path.resolve(__dirname, '..', 'test', './api/oas/oas-v1.yaml');
     done();
   });

@@ -4,8 +4,9 @@ import fs from 'fs';
 import colors from 'colors';
 
 interface Config {
+  name: string;
   rootDir: string;
-  editorDir: string;
+  editorPath: string;
   userHome?: string;
   debug: boolean;
   nodeModules: string;
@@ -14,8 +15,9 @@ interface Config {
 }
 
 const config: Config = {
+  name: 'OpenAPI Swagger Editor',
   rootDir: path.resolve(__dirname, '../../'),
-  editorDir: '',
+  editorPath: require.resolve('swagger-editor-dist'),
   userHome: process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'],
   debug: !!process.env.DEBUG,
   nodeModules: '',
@@ -24,13 +26,13 @@ const config: Config = {
 };
 
 config.nodeModules = path.resolve(config.rootDir, 'node_modules');
-config.editorDir = path.resolve(config.nodeModules, 'swagger-editor-dist');
+config.editorPath = path.dirname(config.editorPath);
 
 if (!fs.existsSync(config.nodeModules)) {
   console.error(colors.red(`Node modules path ${config.nodeModules} does not exist.`));
 }
-if (!fs.existsSync(config.editorDir)) {
-  console.error(colors.red(`Editor dist path ${config.editorDir} does not exist.`));
+if (!fs.existsSync(config.editorPath)) {
+  console.error(colors.red(`Editor dist path ${config.editorPath} does not exist.`));
 }
 
 export default config;

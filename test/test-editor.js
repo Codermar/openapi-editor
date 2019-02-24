@@ -1,11 +1,11 @@
-const editor = require('../dist');
+const openApiEditor = require('../dist/editor');
 const path = require('path');
-const oasFilePath = path.resolve(__dirname, '..', 'test', './api/oas/oas-v1.yaml');
+const oasFilePath = path.resolve(__dirname, 'api/v1/api.yaml');
 
 const options = {
-  oasFilePath,
-  // port: 10010,
+  file: oasFilePath,
+  port: 10010,
   silent: false,
 };
-editor.edit(options);
 
+openApiEditor.edit(options);
