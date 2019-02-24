@@ -1,51 +1,69 @@
 # openapi-editor
 
-OpenAPI Editor is a wrapper for Swagger-Editor 3.x".
+The **OpenAPI Editor** is a wrapper package built around the [Swagger Editor](https://github.com/swagger-api/swagger-editor) tool which allows you to edit [Open API specifications](https://github.com/OAI/OpenAPI-Specification) in YAML inside your browser and preview its documentations in real time.
+
+The OpenAPI Specification is a community-driven open specification within the [OpenAPI Initiative](https://www.openapis.org/), a Linux Foundation Collaborative Project.
+
+**OpenAPI Editor** is built with [swagger-editor-dist](https://www.npmjs.com/package/swagger-editor-dist) which is a dependency-free module that includes everything you need to serve Swagger Editor in a project.
 
 ## Features
 
-* Edit, validate, and save your [Open API specifications](https://github.com/OAI/OpenAPI-Specification) yaml file in the browser using [Swagger Editor](https://github.com/swagger-api/swagger-editor).
-* Additional Features provided by [Swagger Editor](https://github.com/swagger-api/swagger-editor)
+* Runs as a stand-alone web application in a port of your choice.
+* Edit, validate and save your OpenAPI yaml file describing your project API.
 
-[![Build Status](https://travis-ci.org/<username>/<reponame>.svg?branch=master)](https://travis-ci.org/Codermar/openapi-editor)
-[![Coverage Status](https://coveralls.io/repos/github/<username>/<reponame>/badge.svg?branch=master)](https://coveralls.io/github/Codermar/openapi-editor?branch=master)
+## Getting Started
 
-## Installation
+In a typical workflow of building an API based on the [Open API specifications](https://github.com/OAI/OpenAPI-Specification), you would design and model your API, write the implementation code, test it and maintain it.
 
-  ```npm i openapi-editor``` 
-  
-  <!-- *Optional global install* ```npm i openapi-editor -g``` -->
+### Install
 
-## Usage
+In a new or existing folder containing your project:
 
-<!-- ### Installed globally
+```npm install openapi-editor```
 
-```bash
-cd your-project-dir
+### Usage
+
+By default ```openapi-editor``` will run in a dynamically assigned port and will attempt to find an OpenAPI yaml file in the default path ```src/api/v1/api.yaml```
+
+You can add an entry to the "scripts" section in package.json:
+
+```json
+"scripts": {
+  "api:edit": "openapi-editor --file ./src/api/v1/api.yaml --port 10021"
+}
 ```
 
-  Specify path and optional port
+You can also run it from the command line using ```npx```
 
-```bash
-  openapi-editor --path ./src/api/my-openapi.yaml --port 10010
-``` -->
+```npx openapi-editor --file ./src/api/v1/api.yaml --port 10021```
 
-### Installed as Local Dependency
+Or in JavaScript by importing the module
 
 ```javascript
-  import editor from 'openapi-editor'
+const openApiEditor = require('openapi-editor');
 
-  const openApiEditor = require('openapi-editor');
+const options = {
+  file: './src/api/v1/api.yaml', // specify path as string or fully resolved path
+  port: 10021, // specify port or omit for random port usage
+  silent: false, // invoque browser or run silently
+};
 
-  const options = {
-    oasFilePath: './src/api/oas/oas-v1.yaml', // specify path as string or fully resolved path
-    port: 10015, // specify port or omit for random port usage
-    silent: false, // invoque browser or run silently
-  };
-
-  openApiEditor.edit(options);
-
+openApiEditor.edit(options);
 ```
+
+## API
+
+### ```--file [optional]```
+
+The OpenAPI specification File to edit. Defaults to ```src/api/v1/api.yaml```
+
+### ```--port [optional]```
+
+Optional port to run. Defaults to 0 or dynamically assigned port.
+
+### ```--silent [optional true/false]```
+
+Automatically opens default browser. Defaults to true.
 
 ## Licence
 
@@ -53,11 +71,15 @@ This project is licensed under the MIT License
 
 ## Development Setup
 
-<!-- TODO -->
+Clone this repo ```git clone https://github.com/Codermar/openapi-editor```
 
-## Test
+```npm install```
 
-  `npm test`
+```npm run test:watch``` To run tests in watch mode.
+
+```npm run build``` or ```npm run build:watch``` To build the project.
+
+  `npm test` to run the tests.
 
 ## Contributing
 
