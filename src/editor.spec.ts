@@ -9,7 +9,7 @@ describe('OpenApi Editor', () => {
   let swaggerFile: string;
 
   before((done) => {
-    swaggerFile = path.resolve(__dirname, '..', 'test', './api/v1/api.yaml');
+    swaggerFile = path.resolve(__dirname, '..', 'examples', './api/v1/api.yaml');
     done();
   });
 

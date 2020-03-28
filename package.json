@@ -18,8 +18,9 @@
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run ci",
     "preversion": "npm run ci",
-    "test": "nyc mocha",
-    "test:coverage": "TS_NODE_COMPILER_OPTIONS='{\"target\":\"es6\"}' nyc mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "nyc mocha -r ts-node/register **/*.spec.ts",
+    "test:coverage": "TS_NODE_COMPILER_OPTIONS='{\"target\":\"es6\"}' nyc mocha **/*.spec.ts",
     "test:watch": "mocha -r ts-node/register src/**/*.spec.ts --watch --watch-extensions ts"
   },
   "keywords": [
@@ -36,31 +37,36 @@
   },
   "license": "MIT",
   "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "all": true,
+    "check-coverage": true,
     "include": [
-      "src/**/*.ts"
+      "**/*.spec.ts"
     ],
     "extension": [
       ".ts"
     ],
     "require": [
-      "ts-node/register"
+      "ts-node/register",
+      "source-map-support/register"
     ],
     "reporter": [
       "text-summary",
       "html"
     ],
     "sourceMap": true,
-    "instrument": true
+    "instrument": true,
+    "fullTrace": true,
+    "bail": true,
+    "lines": 40
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
-    "@types/istanbul": "^0.4.30",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.9.5",
     "chai": "^4.2.0",
     "coveralls": "^3.0.11",
     "gh-pages": "^2.2.0",
-    "istanbul": "^0.4.5",
     "mocha": "^7.1.1",
     "nyc": "^15.0.0",
     "rewire": "^5.0.0",
@@ -71,6 +77,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/express": "^4.17.3",
     "colors": "^1.4.0",
     "commander": "^5.0.0",
