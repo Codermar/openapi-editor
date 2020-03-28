@@ -5,3 +5,4 @@ tmp/
 .vscode
 coverage/
 docs/
+.history
