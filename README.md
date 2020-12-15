@@ -44,6 +44,7 @@ const openApiEditor = require('openapi-editor');
 
 const options = {
   file: './src/api/v1/api.yaml', // specify path as string or fully resolved path
+  host: '127.0.0.1', // specify ip 
   port: 10021, // specify port or omit for random port usage
   silent: false, // invoque browser or run silently
 };
@@ -56,6 +57,10 @@ openApiEditor.edit(options);
 ### ```--file [optional]```
 
 The OpenAPI specification File to edit. Defaults to ```src/api/v1/api.yaml```
+
+### ```--host [optional]```
+
+Optional ip to run. Defaults to 127.0.0.1 .
 
 ### ```--port [optional]```
 
@@ -80,6 +85,11 @@ Clone this repo ```git clone https://github.com/Codermar/openapi-editor```
 ```npm run build``` or ```npm run build:watch``` To build the project.
 
   `npm test` to run the tests.
+
+## Docker
+```cd docker```
+```docker build -t Codermar/open-api .```
+```docker run -d --name openapieditor --restart always -p 8080:8080 Codermar/open-api```
 
 ## Contributing
 

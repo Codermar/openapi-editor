@@ -1,0 +1,8 @@
+{
+    "scripts": {
+      "start": "openapi-editor --file ./api.yaml --port 8080 --silent true --host 0.0.0.0"
+    },
+    "dependencies": {
+      "openapi-editor": "^0.2.0"
+    }
+  }

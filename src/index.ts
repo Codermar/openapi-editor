@@ -8,6 +8,7 @@ import { edit } from './editor';
 cmd
   .version('0.5.3', '-v, --version')
   .option('-f, --file [file]', 'File')
+  .option('-h, --host [ip]', 'IP')
   .option('-p, --port [port]', 'Port')
   .option('-s --silent', 'Run without launching the browser')
   .parse(process.argv);
@@ -20,6 +21,7 @@ if (!fs.existsSync(file)) {
 
 const options = {
   file,
+  host: cmd.host || '127.0.0.1',
   ...cmd.port && { port: cmd.port },
   silent: cmd.silent,
 };
