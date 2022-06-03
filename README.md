@@ -47,6 +47,7 @@ const options = {
   host: '127.0.0.1', // specify ip 
   port: 10021, // specify port or omit for random port usage
   silent: false, // invoque browser or run silently
+  basicauth: "username:password" // if you want to protect the editor
 };
 
 openApiEditor.edit(options);
@@ -69,6 +70,10 @@ Optional port to run. Defaults to 0 or dynamically assigned port.
 ### ```--silent [optional true/false]```
 
 Automatically opens default browser. Defaults to true.
+
+### ```--basicauth [optional username:password]```
+
+Optional basic authentication,it is useful if you expose the editor in wild.
 
 ## Licence
 
