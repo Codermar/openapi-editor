@@ -79,7 +79,7 @@
   "dependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.1",
     "@types/express": "4.17.9",
-    "express-basic-auth":"^1.2.1",
+    "basic-auth-connect":"^1.0.0",
     "colors": "1.4.0",
     "commander": "6.2.1",
     "connect": "3.7.0",
