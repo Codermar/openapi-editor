@@ -18,6 +18,7 @@ export interface Options {
   host?: string;
   port?: string;
   silent?: boolean; // invoque browser or run silently
+  basicAuth?: string;
 }
 
 // swagger-editor must be served from root
@@ -37,6 +38,19 @@ export const edit = (options: Options): void => {
     return;
   }
   const app = require('connect')();
+  //Use connect with basic auth
+  // use basic auth if provided
+  if (options.basicAuth) {
+    const [user, pass] = options.basicAuth.split(':');
+    if (!user || !pass) {
+      console.error(colors.red(`Invalid basic auth credentials ${options.basicAuth}`));
+      return;
+    }
+    app.use(
+      require('basic-auth-connect')(user, pass)
+    );
+  }
+
   // save the file from swagger-editor
   app.use(SWAGGER_EDITOR_SAVE_PATH, (req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (req.method !== 'PUT') { return next(); }

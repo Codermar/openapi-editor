@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import colors from 'colors';
-import cmd from 'commander';
+import cmd, { option } from 'commander';
 import { edit } from './editor';
 
 cmd
@@ -10,7 +10,8 @@ cmd
   .option('-f, --file [file]', 'File')
   .option('-h, --host [ip]', 'IP')
   .option('-p, --port [port]', 'Port')
-  .option('-s --silent', 'Run without launching the browser')
+  .option('-s, --silent', 'Run without launching the browser')
+  .option('-b, --basicauth [user:pass]', 'Basic Auth')
   .parse(process.argv);
 
 const file = path.resolve(cmd.file || 'src/api/v1/api.yaml');
@@ -24,6 +25,7 @@ const options = {
   host: cmd.host || '127.0.0.1',
   ...cmd.port && { port: cmd.port },
   silent: cmd.silent,
+  basicAuth: cmd.basicauth,
 };
 
 edit(options);
